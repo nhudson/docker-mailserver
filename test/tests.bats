@@ -1343,7 +1343,7 @@ load 'test_helper/bats-assert/load'
 @test "checking setup.sh: setup.sh debug inspect" {
   run ./setup.sh -c mail debug inspect
   assert_success
-  [ "${lines[0]}" = "Image: tvial/docker-mailserver:testing" ]
+  [ "${lines[0]}" = "Image: nhudson/mail-server:testing" ]
   [ "${lines[1]}" = "Container: mail" ]
 }
 @test "checking setup.sh: setup.sh debug login ls" {
@@ -1621,7 +1621,7 @@ load 'test_helper/bats-assert/load'
   # check sender is not the default one.
   run docker exec mail grep "From: mailserver-report@mail.my-domain.com" /var/mail/localhost.localdomain/user1/new/ -R
   assert_failure
-  
+
   # checking default sender is correctly set when env variable not defined
   run docker exec mail_with_ldap grep "mailserver-report@mail.my-domain.com" /etc/logrotate.d/maillog
   assert_success
